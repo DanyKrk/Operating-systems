@@ -1,0 +1,363 @@
+
+ static O0: 
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.100000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.740000	       0.000000	       0.000000	
+
+ shared O0:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.540000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.760000	       0.010000	       0.000000	
+
+ dynamic O0:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.120000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.540000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.540000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.100000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.740000	       0.010000	       0.000000	
+
+ static O:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.530000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.050000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.100000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.780000	       0.000000	       0.000000	
+
+ shared O:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.140000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.570000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.770000	       0.000000	       0.000000	
+
+ dynamic O:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.120000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.110000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.750000	       0.000000	       0.000000	
+
+ static O1:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.140000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.780000	       0.000000	       0.000000	
+
+ shared O1:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.120000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.110000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.800000	       0.000000	       0.000000	
+
+ dynamic O1:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.120000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.110000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.780000	       0.000000	       0.000000	
+
+ static O2:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.790000	       0.000000	       0.000000	
+
+ shared O2:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.120000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.790000	       0.000000	       0.000000	
+
+ dynamic O2:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.050000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.120000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.780000	       0.000000	       0.000000	
+
+ static O3:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.810000	       0.000000	       0.000000	
+
+ shared O3:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.830000	       0.000000	       0.000000	
+
+ dynamic O3:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.050000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.120000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.110000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.800000	       0.000000	       0.000000	
+
+ static Os:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.120000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.050000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.790000	       0.010000	       0.000000	
+
+ shared Os:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.570000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.050000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.120000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.570000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.140000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.810000	       0.000000	       0.000000	
+
+ dynamic Os:
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.060000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.120000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.560000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.010000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.150000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.780000	       0.000000	       0.000000	
+
+//KOMENTARZ
+// Operacje najszybciej wykonuja sie najszybciej dla optymalizacji O0, a najwolniej dla optymalizacji O3. Roznice sa jednak bardzo niewielkie, co wynika z malego rozmiaru projektu.

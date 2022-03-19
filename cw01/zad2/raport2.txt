@@ -1,0 +1,18 @@
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.020000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.030000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.030000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.180000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.020000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.040000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.180000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       0.370000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       0.920000	       0.000000	       0.000000	

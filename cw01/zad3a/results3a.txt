@@ -1,0 +1,63 @@
+
+static: 
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.010000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.120000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.130000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.770000	       0.000000	       0.000000	
+
+shared: 
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.010000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.070000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.120000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.000000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.120000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.770000	       0.000000	       0.000000	
+
+dynamic: 
+                                    Name		       Real [s]	       User [s]	     System [s]
+               Counting for a small file:		       0.000000	       0.000000	       0.000000	
+              Counting for a medium file:		       0.020000	       0.000000	       0.000000	
+                 Counting for a big file:		       0.050000	       0.000000	       0.000000	
+                Counting for 2 big files:		       0.110000	       0.000000	       0.000000	
+               Counting for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Saving results for a small file:		       0.010000	       0.000000	       0.000000	
+        Saving results for a medium file:		       0.010000	       0.000000	       0.000000	
+           Saving results for a big file:		       0.060000	       0.000000	       0.000000	
+          Saving results for 2 big files:		       0.110000	       0.000000	       0.000000	
+         Saving results for 10 big files:		       0.550000	       0.000000	       0.000000	
+         Removing block for a small file:		       0.000000	       0.000000	       0.000000	
+        Removing block for a medium file:		       0.000000	       0.000000	       0.000000	
+           Removing block for a big file:		       0.000000	       0.000000	       0.000000	
+          Removing block for 2 big files:		       0.000000	       0.000000	       0.000000	
+         Removing block for 10 big files:		       0.000000	       0.000000	       0.000000	
+ Adding 10 blocks and then removing them:		       1.140000	       0.000000	       0.000000	
+    Adding and removing a block 10 times:		       2.780000	       0.000000	       0.000000
+
+//KOMENTARZ
+//Z wynikow wynika, ze biblioteki dynamiczne sa walniejsze od statycznych i wspoldzielonych, przy czym w tak malym projekcie roznice sa ledwo zauwazalne.
