@@ -1,0 +1,21 @@
+                                    Name		       Real [s]	       User [s]	     System [s]
+        Copying with library functions: :		       0.090000	       0.040000	       0.050000	
+         Copying with system functions: :		       0.180000	       0.050000	       0.120000	
+        Copying with library functions: :		       0.050000	       0.030000	       0.010000	
+         Copying with system functions: :		       0.180000	       0.010000	       0.170000	
+        Copying with library functions: :		       0.050000	       0.030000	       0.020000	
+         Copying with system functions: :		       0.180000	       0.060000	       0.120000	
+        Copying with library functions: :		       0.050000	       0.020000	       0.010000	
+         Copying with system functions: :		       0.180000	       0.050000	       0.130000	
+        Copying with library functions: :		       0.050000	       0.040000	       0.010000	
+         Copying with system functions: :		       0.180000	       0.070000	       0.110000	
+        Copying with library functions: :		       0.060000	       0.030000	       0.020000	
+         Copying with system functions: :		       0.170000	       0.080000	       0.090000	
+        Copying with library functions: :		       0.050000	       0.040000	       0.000000	
+         Copying with system functions: :		       0.180000	       0.040000	       0.130000	
+        Copying with library functions: :		       0.040000	       0.040000	       0.010000	
+         Copying with system functions: :		       0.180000	       0.090000	       0.080000	
+        Copying with library functions: :		       0.050000	       0.040000	       0.000000	
+         Copying with system functions: :		       0.180000	       0.040000	       0.140000	
+        Copying with library functions: :		       0.050000	       0.040000	       0.010000	
+         Copying with system functions: :		       0.180000	       0.050000	       0.120000	

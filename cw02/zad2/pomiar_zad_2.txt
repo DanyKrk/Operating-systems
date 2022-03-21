@@ -1,0 +1,21 @@
+                                    Name		       Real [s]	       User [s]	     System [s]
+       Counting with library functions: :		       0.030000	       0.020000	       0.000000	
+        Counting with system functions: :		       0.020000	       0.010000	       0.010000	
+       Counting with library functions: :		       0.020000	       0.020000	       0.000000	
+        Counting with system functions: :		       0.020000	       0.000000	       0.020000	
+       Counting with library functions: :		       0.020000	       0.020000	       0.000000	
+        Counting with system functions: :		       0.030000	       0.010000	       0.020000	
+       Counting with library functions: :		       0.020000	       0.010000	       0.000000	
+        Counting with system functions: :		       0.020000	       0.030000	       0.000000	
+       Counting with library functions: :		       0.020000	       0.010000	       0.010000	
+        Counting with system functions: :		       0.020000	       0.020000	       0.000000	
+       Counting with library functions: :		       0.020000	       0.020000	       0.000000	
+        Counting with system functions: :		       0.030000	       0.020000	       0.000000	
+       Counting with library functions: :		       0.010000	       0.020000	       0.000000	
+        Counting with system functions: :		       0.030000	       0.030000	       0.000000	
+       Counting with library functions: :		       0.020000	       0.020000	       0.000000	
+        Counting with system functions: :		       0.020000	       0.020000	       0.000000	
+       Counting with library functions: :		       0.020000	       0.020000	       0.000000	
+        Counting with system functions: :		       0.030000	       0.010000	       0.000000	
+       Counting with library functions: :		       0.020000	       0.020000	       0.000000	
+        Counting with system functions: :		       0.020000	       0.030000	       0.010000	
