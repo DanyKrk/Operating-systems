@@ -12,6 +12,10 @@ Tablice / bloki powinny być alokowane przy pomocy funkcji calloc() (alokacja dy
 
 Przygotuj plik Makefile, zawierający polecenia kompilujące pliki źródłowe biblioteki oraz tworzące biblioteki w dwóch wersjach: statyczną i współdzieloną.
 
+
+
+
+
 Zadanie 2. Program korzystający z biblioteki (25%)
 Napisz program testujący działanie funkcji z biblioteki z zadania 1.
 
@@ -33,6 +37,7 @@ Na przemian  kilkakrotne dodanie i usunięcie zadanej liczby bloków
 Mierząc czasy poszczególnych operacji, zapisz trzy wartości: czas rzeczywisty, czas użytkownika i czas systemowy. Rezultaty umieść pliku raport2.txt i dołącz do archiwum zadania.
 
 Zadanie 3. Testy i pomiary (50%)
+
 a. (25%) Przygotuj plik Makefile, zawierający polecenie uruchamiania testów oraz polecenia kompilacji programu z zad 2 na trzy sposoby:
 Z wykorzystaniem bibliotek statycznych,
 Z wykorzystaniem bibliotek dzielonych (dynamiczne, ładowane przy uruchomieniu programu),
