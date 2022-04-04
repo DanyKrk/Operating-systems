@@ -1,0 +1,24 @@
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000001000000000 and 10 processes:		       0.000000	       0.000000	       0.000000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000001000000000 and 100 processes:		       0.010000	       0.000000	       0.000000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000001000000000 and 1000 processes:		       0.050000	       0.000000	       0.040000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000001000000000 and 10000 processes:		       0.500000	       0.020000	       0.440000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000000010000000 and 10 processes:		       0.080000	       0.000000	       0.000000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000000010000000 and 100 processes:		       0.110000	       0.000000	       0.000000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000000010000000 and 1000 processes:		       0.100000	       0.000000	       0.030000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000000010000000 and 10000 processes:		       0.530000	       0.000000	       0.500000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000000000100000 and 10 processes:		       8.010000	       0.000000	       0.000000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000000000100000 and 100 processes:		       8.180000	       0.000000	       0.000000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000000000100000 and 1000 processes:		       8.480000	       0.000000	       0.040000	
+                                                                    Name		       Real [s]	       User [s]	     System [s]
+Operation time for rectangles of width: 0.000000000100000 and 10000 processes:		       8.910000	       0.000000	       0.410000		
