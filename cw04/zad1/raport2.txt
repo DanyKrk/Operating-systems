@@ -1,11 +1,11 @@
 Wersja z fork():
 Ignorowanie - dziedziczone
-Handler - nie dziedziczony (powrót do domyslnej obslugi)
+Handler - dziedziczone
 Maskowanie - dziedziczone
 Sygnal czekajacy w procesie macierzystym - nie jest widoczny w procesie potomnym
 
 Wersja z exec():
-Ignorowanie - dziedzicznone
+Ignorowanie - nie dziedzicznone (powrot do domyslnej obslugi)
 Handler - nie dziedziczony (powrot do domyslnej obslugi)
 Maskowanie - dziedziczone
 Sygnal czekajacy przed exec - nadal jest widoczny po wywolaniu exec()

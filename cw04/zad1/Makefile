@@ -2,6 +2,7 @@ CC = gcc
 CFLAGS = -Wall
 
 test:
+	make remove_executables
 	make main_exec
 	make main_fork
 	./main_fork ignore
@@ -25,3 +26,6 @@ main_fork:
 
 clean:
 	rm -f *.o *.a *.so 
+
+remove_executables:
+	rm exec_file main_exec main_fork

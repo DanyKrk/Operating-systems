@@ -7,15 +7,18 @@
 #include <signal.h>
 #include <string.h>
 
+void async_signal_safe_print (const char *s){
+    write(STDOUT_FILENO, s, strlen(s));
+}
+
 int main(int argc, char **argv){
     if (strcmp(argv[1], "pending") != 0){
         raise(SIGUSR1);
-        printf("after second raise\n");
     }
     if (strcmp(argv[1], "mask") == 0 || strcmp(argv[1], "pending") == 0){
         sigset_t pending_set;
         sigpending(&pending_set);
         printf("SIGUSR1 pending - exec_file: %d\n", sigismember(&pending_set, SIGUSR1));
     }
-    printf("program end\n");
+    async_signal_safe_print("program end\n");
 }
