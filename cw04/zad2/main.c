@@ -7,12 +7,12 @@
 #include <stdlib.h>
 #include <sys/wait.h>
 
-void handler(int sig, siginfo_t *info, void *ucontext) {
-    printf("Signal number: %d\n", (int)info->si_signo);
-    printf("Sending process PID: %d\n", (int)info->si_pid);
-    printf("An errno value: %d\n", (int)info->si_errno);
-    printf("Real user ID of sending process: %d\n", (int)info->si_uid);
-    printf("System time consumed: %lf\n\n", (double)info->si_stime/sysconf(_SC_CLK_TCK));
+void handler(int sig, siginfo_t *siginfo, void *ucontext) {
+    printf("Signal number: %d\n", (int)siginfo->si_signo);
+    printf("Sending process PID: %d\n", (int)siginfo->si_pid);
+    printf("An errno value: %d\n", (int)siginfo->si_errno);
+    printf("Real user ID of sending process: %d\n", (int)siginfo->si_uid);
+    printf("System time consumed: %lf\n\n", (double)siginfo->si_stime / sysconf(_SC_CLK_TCK));
 }
 
 

@@ -6,31 +6,17 @@
 #include <string.h>
 #include <sys/types.h>
 
-void async_signal_safe_print (const char *s){
-    write(STDOUT_FILENO, s, strlen(s));
-}
-
 void handler(int signal){
-    char message [] = "write: I got signal!!! (handler)\n";
-    async_signal_safe_print(message);
+    printf("I got signal!!! (handler)\n");
 }
 
 int main(int argc, char **argv){
-    struct sigaction act;
     if (strcmp(argv[1], "ignore") == 0){
-        act.sa_handler = SIG_IGN;
-        if (sigaction(SIGUSR1, &act, NULL) == -1) {
-            perror("sigaction failed");
-            exit(EXIT_FAILURE);
-        }
+        signal(SIGUSR1, SIG_IGN);
     }
 
     else if (strcmp(argv[1], "handler") == 0){
-        act.sa_handler = handler;
-        if (sigaction(SIGUSR1, &act, NULL) == -1) {
-            perror("sigaction failed");
-            exit(EXIT_FAILURE);
-        }
+        signal(SIGUSR1, handler);
     }
 
     else if (strcmp(argv[1], "mask") == 0 || strcmp(argv[1], "pending") == 0){
@@ -43,34 +29,6 @@ int main(int argc, char **argv){
         }
     }
     raise(SIGUSR1);
-
-    if (strcmp(argv[1], "ignore") == 0){
-        act.sa_handler = SIG_IGN;
-        if (sigaction(SIGUSR1, &act, NULL) == -1) {
-            perror("sigaction failed");
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    else if (strcmp(argv[1], "handler") == 0){
-        act.sa_handler = handler;
-        if (sigaction(SIGUSR1, &act, NULL) == -1) {
-            perror("sigaction failed");
-            exit(EXIT_FAILURE);
-        }
-    }
-
-    else if (strcmp(argv[1], "mask") == 0 || strcmp(argv[1], "pending") == 0){
-        sigset_t mask;
-        sigemptyset(&mask);
-        sigaddset(&mask, SIGUSR1);
-        if (sigprocmask(SIG_SETMASK, &mask, NULL) < 0) {
-            perror("Couldn' t set process mask!!!\n");
-            exit(1);
-        }
-    }
-
-
     sigset_t pending_set;
     if (strcmp(argv[1], "mask") == 0 || strcmp(argv[1], "pending") == 0){
         sigpending(&pending_set);
@@ -88,6 +46,6 @@ int main(int argc, char **argv){
             printf("SIGUSR1 pending - child: %d\n", sigismember(&pending_set, SIGUSR1));
         }
     }
-    async_signal_safe_print("program end\n");
+    printf("program end\n");
 }
 
