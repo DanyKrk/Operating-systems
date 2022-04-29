@@ -1,0 +1,3 @@
+/home/daniel/AGH/Sysopy/Operating-systems/cw06/cmake-build-debug/CMakeFiles/cw06.dir
+/home/daniel/AGH/Sysopy/Operating-systems/cw06/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/daniel/AGH/Sysopy/Operating-systems/cw06/cmake-build-debug/CMakeFiles/rebuild_cache.dir
