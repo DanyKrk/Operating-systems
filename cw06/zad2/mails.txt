@@ -1,8 +1,0 @@
-ala@student.agh.edu.pl	ala	AlaHasCat
-ola@stuednt.agh.edu.pl	ola1	OlaHasCat
-abba@student.agh.edu.pl	abba	AbbaHasCat
-ola@student.agh.edu.pl	ola2	CatHasOla
-ola@student.agh.edu.pl	ola3	YouveGotMail!!!
-alaAdress	topic	content
-alaAdress2	topic2	content2
-alaAdress3	topic3	content3

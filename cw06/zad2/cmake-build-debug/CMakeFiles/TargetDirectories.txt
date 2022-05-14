@@ -1,3 +1,0 @@
-/home/daniel/AGH/Sysopy/Operating-systems/cw05/zad2/cmake-build-debug/CMakeFiles/zad2.dir
-/home/daniel/AGH/Sysopy/Operating-systems/cw05/zad2/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/daniel/AGH/Sysopy/Operating-systems/cw05/zad2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
