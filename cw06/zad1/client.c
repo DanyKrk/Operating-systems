@@ -1,209 +1,160 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <errno.h>
-#include <signal.h>
-#include <time.h>
-#include <unistd.h>
-#include <sys/select.h>
-#include <sys/ipc.h>
-#include <sys/msg.h>
-#include "constants.h"
+#include "header.h"
 
-int server_queue;
-int cq_desc;
 int client_id;
+int server_queue_id;
+int client_queue_id;
 
-void initialize(void) {
-    // server
-    key_t skey = ftok(SERVER_PATH, PROJ_ID);
-    if (skey == -1) {
-        ERROR(1, 1, "Error: server key could not be generated\n");
-    }
-    server_queue = msgget(skey, 0);
-    if (server_queue == -1) {
-        ERROR(1, 1, "Error: server queue could not be opened\n");
-    }
-
-    // client
-    char *home_path = getenv("HOME");
-    if (home_path == NULL) {
-        ERROR(1, 1, "Error: home path could not be obtained\n");
-    }
-    key_t ckey = ftok(home_path, PROJ_ID);
-    if (ckey == -1) {
-        ERROR(1, 1, "Error: client key could not be generated\n");
-    }
-    cq_desc = msgget(ckey, IPC_CREAT | IPC_EXCL | 0666);
-    if (cq_desc == -1) {
-        ERROR(1, 1, "Error: client queue could not be created\n");
-    }
-
-    struct Communique message;
-    message.type = INIT;
-    sprintf(message.content, "%d", ckey);
-    if (msgsnd(server_queue, &message, MSGSND_COMMUNIQUE_SIZE, 0) == -1) {
-        ERROR(1, 1, "Error: initial message to server could not be sent\n");
-    }
-
-    if (msgrcv(cq_desc, &message, MSGSND_COMMUNIQUE_SIZE, INIT, 0) == -1) {
-        ERROR(1, 1, "Error: initial message from server could not be received\n");
-    }
-
-    client_id = message.receiver_id;
+void handle_delete_queue(){
+    delete_queue(client_queue_id);
+    exit(0);
 }
 
-void send_list() {
-    struct Communique message;
-    message.sender_id = client_id;
-    message.type = LIST;
-    if (msgsnd(server_queue, &message, MSGSND_COMMUNIQUE_SIZE, 0) == -1) {
-        ERROR(1, 1, "Error: list message could not be sent\n")
-    }
-
-    struct Communique feedback;
-    if (msgrcv(cq_desc, &feedback, MSGSND_COMMUNIQUE_SIZE, LIST, 0) == -1) {
-        ERROR(1, 1, "Error: list message could not be received\n");
-    }
-
-    printf("CLIENT %d | LIST OF ACTIVE CLIENTS: %s\n", client_id, feedback.content);
+void add_text_to_message(Message* msg){
+    printf("Enter message:\n");
+    char* msg_text_buffer = calloc(MAX_MESSAGE_TEXT_LEN, sizeof(char));
+    fgets(msg_text_buffer, MAX_MESSAGE_TEXT_LEN, stdin);
+    strcpy(msg->mtext, msg_text_buffer);
+    free(msg_text_buffer);
 }
 
-void send_toall(char *str) {
-    struct Communique message;
-    message.sender_id = client_id;
-    message.type = TOALL;
-    if (strlen(str) > MSG_SIZE + 1) {
-        ERROR(0, 0, "Error: message exceeds maximum size\n");
-        return;
-    }
-    strcpy(message.content, str);
-    if (msgsnd(server_queue, &message, MSGSND_COMMUNIQUE_SIZE, 0) == -1) {
-        ERROR(1, 1, "Error: 2all message could not be sent\n");
-    }
+void send_2all_msg(){
+    printf("Client sending 2ALL message\n");
+
+    time_t seconds_since_epoch = time(NULL);
+    Message msg = {.client_id = client_id, .mtype = TO_ALL, .time=*localtime(&seconds_since_epoch)};
+
+    add_text_to_message(&msg);
+
+    send_message(server_queue_id, &msg);
 }
 
-void send_toone(int dest_id, char *str) {
-    struct Communique message;
-    message.sender_id = client_id;
-    message.receiver_id = dest_id;
-    message.type = TOONE;
-    if (strlen(str) > MSG_SIZE + 1) {
-        ERROR(0, 0, "Error: message exceeds maximum size\n");
-        return;
-    }
-    strcpy(message.content, str);
-    if (msgsnd(server_queue, &message, MSGSND_COMMUNIQUE_SIZE, 0) == -1) {
-        ERROR(1, 1, "Error: 2one message could not be sent\n");
-    }
+void send_2one_msg(){
+    printf("Client sending 2ONE message\n");
+
+    time_t seconds_since_epoch = time(NULL);
+    Message msg = {.client_id = client_id, .mtype = TO_ONE, .time=*localtime(&seconds_since_epoch)};
+
+    printf("Enter target client id:\n");
+    char* target_client_id_buffer = calloc(MAX_MESSAGE_TEXT_LEN, sizeof(char));
+    fgets(target_client_id_buffer, MAX_MESSAGE_TEXT_LEN, stdin);
+    msg.target_client_id = atoi(target_client_id_buffer);
+    free(target_client_id_buffer);
+
+    add_text_to_message(&msg);
+
+    send_message(server_queue_id, &msg);
 }
 
-void send_stop(int exit_val) {
-    struct Communique message;
-    message.sender_id = client_id;
-    message.type = STOP;
-    if (msgsnd(server_queue, &message, MSGSND_COMMUNIQUE_SIZE, 0) == -1) {
-        ERROR(1, 1, "Error: stop message could not be sent\n");
-    }
-    exit(exit_val);
+
+void send_list_msg(){
+    printf("Client sending LIST message\n");
+    time_t seconds_since_epoch = time(NULL);
+    Message msg = {.mtype = LIST, .time=*localtime(&seconds_since_epoch)};
+    send_message(server_queue_id, &msg);
 }
 
-void closing_procedure(void) {
-    if (msgctl(cq_desc, IPC_RMID, NULL) == -1) {
-        ERROR(1, 1, "Error: client queue could not be removed\n");
-    }
+void send_stop_msg(){
+    printf("Client sending STOP message\n");
+    time_t seconds_since_epoch = time(NULL);
+    Message msg = {.client_id = client_id, .mtype = STOP, .time=*localtime(&seconds_since_epoch)};
+    send_message(server_queue_id, &msg);
+    handle_delete_queue();
 }
 
-int check_for_input(void) {
-    fd_set rfds;
-    struct timeval tv;
-    tv.tv_sec = 0;
-    tv.tv_usec = 0;
-    FD_ZERO(&rfds);
-    FD_SET(0, &rfds);
+void connect_with_server(){
+    time_t seconds_since_epoch = time(NULL);
+    Message msg = {.queue_id = client_queue_id, .mtype = INIT, .time=*localtime(&seconds_since_epoch)};
+    send_message(server_queue_id, &msg);
 
-    select(STDIN_FILENO + 1, &rfds, NULL, NULL, &tv);
-    return (FD_ISSET(0, &rfds));
+    Message received_msg;
+    receive_message(client_queue_id, &received_msg, INIT);
+
+    client_id = received_msg.client_id;
+    printf("Client id assigned by server: %d\n", received_msg.client_id);
 }
 
-void handle_message_to(int sender_id, time_t send_time, char *content) {
-    char buff[20];
-    strftime(buff, 20, "%Y-%m-%d %H:%M:%S", localtime(&send_time));
-    printf("CLIENT %d | MESSAGE FROM %d at %s:\n", client_id, sender_id, buff);
-    printf("    %s\n", content);
-}
+int queue_has_messages(int q){
+    struct msqid_ds buf;
+    msgctl(q, IPC_STAT, &buf);
 
-int main() {
-    if (atexit(closing_procedure) == -1) {
-        ERROR(1, 1, "Error: exit handler could not be set\n");
-    }
-
-    if (signal(SIGINT, send_stop) == SIG_ERR) {
-        ERROR(1, 1, "Error: SIGINT handler could not be set\n")
-    }
-
-    initialize();
-
-    struct msqid_ds queue;
-    struct Communique message;
-    char input_buffer[MSG_SIZE+20];
-
-    printf("CLIENT %d | Enter commands:\n", client_id);
-    fflush(stdout);
-    while(1) {
-        if (msgctl(cq_desc, IPC_STAT, &queue)) {
-            ERROR(1, 1, "Error: client queue status could not be obtained\n");
-        }
-        if (queue.msg_qnum > 0) {
-            if (msgrcv(cq_desc, &message, MSGSND_COMMUNIQUE_SIZE, 0, 0) == -1) {
-                ERROR(1, 1, "Error: message from client queue could not be obtained\n");
-            }
-            switch(message.type) {
-                case STOP:
-                    send_stop(0);
-                    break;
-                case TOALL: case TOONE:
-                    handle_message_to(message.sender_id, message.send_time, message.content);
-                    break;
-                default:
-                    ERROR(0, 0, "Error: received message type does not exist\n")
-            }
-        }
-        else if (check_for_input()) {
-            if (fgets(input_buffer, MSG_SIZE+20, stdin) == NULL) {
-                ERROR(1, 1, "Error: user input could not be obtained\n");
-            }
-            if (input_buffer[strlen(input_buffer)-1] == '\n')
-                input_buffer[strlen(input_buffer)-1] = '\0';
-
-            char *ptr;
-            char *token = strtok_r(input_buffer, " \0", &ptr);
-            if (!strcmp(token, "LIST")) {
-                send_list();
-            }
-            else if (!strcmp(token, "STOP")) {
-                send_stop(0);
-            }
-            else if (!strcmp(token, "2ALL")) {
-                send_toall(ptr);
-            }
-            else if (!strcmp(token, "2ONE")) {
-                char *token2 = strtok_r(NULL, " \0", &ptr);
-                errno = 0;
-                int desc_id = strtol(token2, NULL, 10);
-                if (desc_id == 0 && errno != 0) {
-                    ERROR(0, 0, "Error: invalid value representing reveiver id\n");
-                    break;
-                }
-                send_toone(desc_id, ptr);
-            }
-            else {
-                ERROR(0, 0, "Error: invalid message type\n");
-            }
-        }
-        else {
-            usleep(5000);
-        }
-    }
+    if (buf.msg_qnum != 0) return 1;
     return 0;
+}
+
+void receive_messages(){
+    while (queue_has_messages(client_queue_id)){
+        Message msg;
+        receive_message(client_queue_id, &msg, 0);
+
+        char buff[MAX_MESSAGE_TEXT_LEN];
+        switch (msg.mtype)
+        {
+            case STOP:
+                printf("Client received STOP message\n");
+                time_t seconds_since_epoch = time(NULL);
+                Message message_to_server = {.mtype = STOP, .time=*localtime(&seconds_since_epoch)};
+                send_message(server_queue_id, &message_to_server);
+                handle_delete_queue();
+                exit(0);
+            case TO_ALL:
+                printf("Client received 2ALL message\n");
+                strftime(buff, MAX_MESSAGE_TEXT_LEN, "%Y-%m-%d %H:%M:%S", &msg.time);
+                printf("Sender id: %d\nTime: %s\nText: %s\n", msg.client_id, buff, msg.mtext);
+                break;
+            case TO_ONE:
+                printf("Client received 2ONE message\n");
+                strftime(buff, MAX_MESSAGE_TEXT_LEN, "%Y-%m-%d %H:%M:%S", &msg.time);
+                printf("Sender id: %d\nTime: %s\nText: %s\n", msg.client_id, buff, msg.mtext);
+                break;
+        }
+    }
+}
+
+int stdin_has_command(){
+    fd_set read_fd_set;
+    struct timeval time;
+    time.tv_sec = 1;
+    time.tv_usec = 5;
+
+    FD_ZERO(&read_fd_set);
+    FD_SET(STDIN_FILENO, &read_fd_set);
+    select(STDIN_FILENO + 1, &read_fd_set, NULL, NULL, &time);
+    return (FD_ISSET(STDIN_FILENO, &read_fd_set));
+}
+
+
+int main(){
+    printf("Client started\n");
+
+    signal(SIGINT, send_stop_msg);
+    atexit(handle_delete_queue);
+
+    key_t server_queue_key = ftok(get_home_path(), PROJID);
+
+    server_queue_id = msgget(server_queue_key, 0);
+
+    pid_t pid = getpid();
+    key_t client_queue_key = ftok(get_home_path(), pid);
+
+    client_queue_id = msgget(client_queue_key, IPC_CREAT | IPC_EXCL | 0666);
+
+    connect_with_server();
+    char buffer[MAX_MESSAGE_TEXT_LEN];
+    while(1){
+        if (stdin_has_command()) {
+            fgets(buffer, MAX_MESSAGE_TEXT_LEN, stdin);
+            if (strcmp("LIST\n", buffer) == 0)
+                send_list_msg();
+            else if (strcmp("STOP\n", buffer) == 0)
+                send_stop_msg();
+            else if (strcmp("2ONE\n", buffer) == 0)
+                send_2one_msg();
+            else if (strcmp("2ALL\n", buffer) == 0)
+                send_2all_msg();
+            else
+                printf("Wrong command, try again!!!\n");
+        }
+        receive_messages();
+    }
+
 }

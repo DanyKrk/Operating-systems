@@ -1,13 +1,14 @@
-CC = gcc
-CFLAGS = -Wall
+CC = gcc -Wall
 
-all: client server
+all:
+	make server
+	make client
 
-client: client.c
-	$(CC) $(CFLAGS) -o client client.c
+server:
+	$(CC) server.c -o server
 
-server: server.c
-	$(CC) $(CLFAGS) -o server server.c
+client:
+	$(CC) client.c -o client
 
 clean:
-	rm -f client server
+	rm -f client server server_log.txt
