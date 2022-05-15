@@ -39,9 +39,6 @@ void create_shm(){
     oven = shmat(oven_shm_id, NULL, 0);
     table = shmat(table_shm_id, NULL, 0);
 
-    initialize_oven(oven);
-    initialize_table(table);
-
     printf("Created oven (id: %d) and table (id: %d)\n", oven_shm_id, table_shm_id);
 }
 
@@ -53,12 +50,15 @@ void create_sem(){
 
     sem_id = semget(sem_key, 2, IPC_CREAT | 0666);
 
+    printf("Created semaphore set (id: %d)\n", sem_id);
+}
+
+void initialize_sem(){
     union semun arg;
     arg.val = 1;
 
     semctl(sem_id, OVEN_SEM_ID, SETVAL, arg);
     semctl(sem_id, TABLE_SEM_ID, SETVAL, arg);
-    printf("Created semaphore set (id: %d)\n", sem_id);
 }
 
 int main(int argc, char *argv[]){
@@ -71,7 +71,10 @@ int main(int argc, char *argv[]){
 
     atexit(exit_procedure);
     create_shm();
+    initialize_oven();
+    initialize_table();
     create_sem();
+    initialize_sem();
 
     for(int i = 0; i < bakers_num; i++){
         pid_t child_id = fork();

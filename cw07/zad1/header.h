@@ -7,6 +7,8 @@
 
 #include <pwd.h>
 #include <unistd.h>
+#include <sys/time.h>
+#include <time.h>
 #include "stdio.h"
 #include "stdlib.h"
 #include "sys/sem.h"
@@ -27,14 +29,12 @@ typedef struct {
     int pizzas[TABLE_SIZE];
     int pizzas_num;
     int next_in_id;
-    int next_out_id;
 } Table;
 
 typedef struct {
     int pizzas[OVEN_SIZE];
     int pizzas_num;
     int next_in_id;
-    int next_out_id;
 } Oven;
 
 union semun {
@@ -51,6 +51,40 @@ char* get_home_path(){
     if (path == NULL)
         path = getpwuid(getuid())->pw_dir;
     return path;
+}
+
+int get_oven_shm_id(){
+    key_t oven_key;
+    char *home_path = get_home_path();
+    oven_key = ftok(home_path, OVEN_PROJ_ID);
+    return shmget(oven_key, sizeof(Oven), IPC_CREAT | 0666);
+}
+
+int get_table_shm_id(){
+    key_t table_key;
+    char *home_path = get_home_path();
+    table_key = ftok(home_path, TABLE_PROJ_ID);
+    return shmget(table_key, sizeof(Table), IPC_CREAT | 0666);
+}
+
+int get_sem_id(){
+    key_t sem_key;
+    char *home_path = get_home_path();
+    sem_key = ftok(home_path, SEM_PROJ_ID);
+    return semget(sem_key, 2, IPC_CREAT | 0666);
+}
+
+char* get_current_time(){
+    struct timeval cur_time;
+    gettimeofday(&cur_time, NULL);
+    int ml_sec = cur_time.tv_usec / 1000;
+
+    char* buffer = calloc(50, sizeof(char));
+    strftime(buffer, 50, "%H:%M:%S", localtime(&cur_time.tv_sec));
+
+    char* current_time = calloc(50, sizeof(char));
+    sprintf(current_time, "%s:%03d", buffer, ml_sec);
+    return current_time;
 }
 
 #endif //CW07_HEADER_H
