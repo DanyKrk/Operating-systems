@@ -62,7 +62,7 @@ int main(){
         }
 
         my_pizza_id = table -> next_in_id;
-        table -> next_in_id = (oven -> next_in_id + 1) % OVEN_SIZE;
+        table -> next_in_id = (table -> next_in_id + 1) % TABLE_SIZE;
         table -> pizzas[my_pizza_id] = my_pizza_type;
         table -> pizzas_num += 1;
 
