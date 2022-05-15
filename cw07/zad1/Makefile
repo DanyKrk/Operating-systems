@@ -20,4 +20,4 @@ baker:
 
 
 clean:
-	rm -f main
+	rm -f main baker deliverer

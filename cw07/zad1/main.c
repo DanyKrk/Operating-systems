@@ -16,13 +16,11 @@ void exit_procedure(){
 
 void initialize_oven(){
     oven -> next_in_id = 0;
-    oven -> next_out_id = 0;
     oven -> pizzas_num = 0;
 }
 
 void initialize_table(){
     table -> next_in_id = 0;
-    table -> next_out_id = 0;
     table -> pizzas_num = 0;
 }
 
@@ -69,7 +67,7 @@ int main(int argc, char *argv[]){
     int bakers_num = atoi(argv[1]);
     int deliverers_num = atoi(argv[2]);
 
-    atexit(exit_procedure);
+//    atexit(exit_procedure);
     create_shm();
     initialize_oven();
     initialize_table();

@@ -5,6 +5,7 @@ Oven *oven;
 Table *table;
 
 int main(){
+    printf("deliverer!!!\n");
     oven_shm_id = get_oven_shm_id();
     table_shm_id = get_table_shm_id();
     sem_id = get_sem_id();
@@ -20,7 +21,7 @@ int main(){
         semop(sem_id, &table_sembuf, 1);
 
         int table_pizzas_num = table->pizzas_num;
-        while(table_pizzas_num == TABLE_SIZE){
+        while(table_pizzas_num < 1){
             table_sembuf.sem_op = 1;
             semop(sem_id, &table_sembuf, 1);
             table_sembuf.sem_op = -1;
@@ -37,7 +38,7 @@ int main(){
         oven_sembuf.sem_num = OVEN_SEM_ID;
         semop(sem_id, &oven_sembuf, 1);
 
-        printf("%d: %s: Pobieram pizzę: %d. Liczba pizz w piecu: %d. Liczba pizz na stole: %d\n", getpid(),
+        printf("PID: %d: %s: Pobieram pizzę: %d. Liczba pizz w piecu: %d. Liczba pizz na stole: %d\n", getpid(),
                get_current_time(), my_pizza_type, oven -> pizzas_num, table -> pizzas_num);
 
         oven_sembuf.sem_op = 1;
@@ -47,7 +48,7 @@ int main(){
 
         sleep(4);
 
-        printf("%d: %s: Dostarczam pizzę: %d\n", getpid(),
+        printf("PID: %d: %s: Dostarczam pizzę: %d\n", getpid(),
                get_current_time(), my_pizza_type);
 
         sleep(4);

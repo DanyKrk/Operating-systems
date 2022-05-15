@@ -14,7 +14,7 @@ int main(){
 
     while(1) {
         int my_pizza_type = rand() % 10;
-        printf("%d: %s: Przygotowuje pizze: %d\n", getpid(), get_current_time(), my_pizza_type);
+        printf("PID: %d: %s: Przygotowuje pizze: %d\n", getpid(), get_current_time(), my_pizza_type);
 
         sleep(1);
 
@@ -35,7 +35,7 @@ int main(){
         oven -> pizzas[my_pizza_id] = my_pizza_type;
         oven -> pizzas_num += 1;
 
-        printf("%d: %s: Dodałem pizzę: %d. Liczba pizz w piecu: %d\n", getpid(), get_current_time(), my_pizza_type,
+        printf("PID: %d: %s: Dodałem pizzę: %d. Liczba pizz w piecu: %d\n", getpid(), get_current_time(), my_pizza_type,
                oven -> pizzas_num);
 
         oven_sembuf.sem_op = 1;
@@ -69,7 +69,7 @@ int main(){
         oven_sembuf.sem_op = -1;
         semop(sem_id, &oven_sembuf, 1);
 
-        printf("%d: %s: Wyjąłem pizzę: %d. Liczba pizz w piecu: %d. Liczba pizz na stole: %d\n", getpid(),
+        printf("PID: %d: %s: Wyjąłem pizzę: %d. Liczba pizz w piecu: %d. Liczba pizz na stole: %d\n", getpid(),
                get_current_time(), my_pizza_type, oven -> pizzas_num, table -> pizzas_num);
 
         oven_sembuf.sem_op = 1;
