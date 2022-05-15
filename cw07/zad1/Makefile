@@ -1,6 +1,6 @@
 CC = gcc -Wall
 
-all: main, deliverer, baker
+all: main deliverer baker
 	make main
 	make deliverer
 	make baker
