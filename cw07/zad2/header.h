@@ -21,9 +21,12 @@
 #include "semaphore.h"
 #include "sys/stat.h"
 #include "fcntl.h"
+#include "sys/mman.h"
+#include <string.h>
 
 #define TABLE_SIZE 5
 #define OVEN_SIZE 5
+#define NAME_SIZE 30
 
 #define PIZZA_PREPARATION_TIME 1
 #define TRAVEL_TIME 5
@@ -33,13 +36,28 @@
 #define TABLE_NAME "Table"
 #define SEM_NAME "Semaphores"
 
+#define SEM_NUM 5
 #define OVEN_ACCESS_SEM_ID 0
 #define TABLE_ACCESS_SEM_ID 1
 #define FULL_OVEN_SEM_ID 2
 #define FULL_TABLE_SEM_ID 3
 #define EMPTY_TABLE_SEM_ID 4
 
+#define EMPTY_OVEN_SEM "/EMPTY_OVEN_S"
+#define OVEN_SEM "/OVEN_S"
+#define FULL_OVEN_SEM "/FULL_OVEN_S"
+#define EMPTY_TABLE_SEM "/EMPTY_TABLE_S"
+#define TABLE_SEM "/TABLE_S"
+#define FULL_TABLE_SEM "/FULL_TABLE_S"
 
+
+void fill_sem_names(char sem_names[SEM_NUM][NAME_SIZE]){
+    strcpy(sem_names[0], "zero sem");
+    strcpy(sem_names[1], "one sem");
+    strcpy(sem_names[2], "two sem");
+    strcpy(sem_names[3], "three sem");
+    strcpy(sem_names[4], "four sem");
+}
 
 typedef struct {
     int pizzas[TABLE_SIZE];
@@ -61,33 +79,23 @@ union semun {
                                            (Linux-specific) */
 };
 
-
-char* get_home_path(){
-    char* path = getenv("HOME");
-    if (path == NULL)
-        path = getpwuid(getuid())->pw_dir;
-    return path;
+int get_oven_shm_fd(){
+    return shm_open(OVEN_NAME, O_RDWR | O_CREAT, 0666);
 }
 
-int get_oven_shm_id(){
-    key_t oven_key;
-    char *home_path = get_home_path();
-    oven_key = ftok(home_path, OVEN_PROJ_ID);
-    return shmget(oven_key, sizeof(Oven), 0);
+int get_table_shm_fd(){
+    return shm_open(TABLE_NAME, O_RDWR | O_CREAT, 0666);
 }
 
-int get_table_shm_id(){
-    key_t table_key;
-    char *home_path = get_home_path();
-    table_key = ftok(home_path, TABLE_PROJ_ID);
-    return shmget(table_key, sizeof(Table), 0);
-}
-
-int get_sem_id(){
-    key_t sem_key;
-    char *home_path = get_home_path();
-    sem_key = ftok(home_path, SEM_PROJ_ID);
-    return semget(sem_key, 5, 0);
+void fill_sem_addr(sem_t *sem_addr[SEM_NUM], char sem_names[SEM_NUM][NAME_SIZE]){
+    for(int i = 0; i < SEM_NUM; i++){
+        int value = 0;
+        sem_addr[i] = sem_open(sem_names[i], O_RDWR | O_CREAT, 0666, value);
+        if(sem_addr[i] == SEM_FAILED) {
+            perror("Problem with creating semaphore");
+            exit(1);
+        }
+    }
 }
 
 char* get_current_time(){
@@ -103,10 +111,48 @@ char* get_current_time(){
     return current_time;
 }
 
-void add_val_to_sem(int sem_set_id, int sem_id, struct sembuf sembuf, int val){
-    sembuf.sem_num = sem_id;
-    sembuf.sem_op = val;
-    semop(sem_set_id, &sembuf, 1);
+void print_sem_val(sem_t *sem){
+    int val;
+    sem_getvalue(sem, &val);
+    printf("Value of semafor: %d\n", val);
 }
+
+//void add_val_to_sem(sem_t *sem_addr[SEM_NUM], int sem_id, int val){
+//    printf("Sem val before adding %d: ", val);
+//    print_sem_val(sem_addr[sem_id]);
+//
+//    if(val >= 0){
+//        for(int i = 0; i < val; i++){
+//            sem_post(sem_addr[sem_id]);
+//        }
+//    }
+//    else{
+//        for(int i = 0; i < -val; i++){
+//            sem_wait(sem_addr[sem_id]);
+//        }
+//    }
+//    printf("Sem val after adding %d: ", val);
+//    print_sem_val(sem_addr[sem_id]);
+//}
+
+void add_val_to_sem(sem_t *sem, int val){
+    if(val >= 0){
+        for(int i = 0; i < val; i++){
+            sem_post(sem);
+        }
+    }
+    else{
+        for(int i = 0; i < -val; i++){
+            sem_wait(sem);
+        }
+    }
+}
+
+sem_t* get_sem(char* name){
+    sem_t * sem = sem_open(name, O_RDWR);
+    return sem;
+}
+
+
 
 #endif //CW07_HEADER_H

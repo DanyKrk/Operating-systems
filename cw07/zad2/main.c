@@ -1,33 +1,41 @@
 #include "header.h"
 
-
-sem_t oven_shm_id, table_shm_id, sem_set_id;
+sem_t *sem_addr[SEM_NUM];
+char sem_names[SEM_NUM][NAME_SIZE];
+int oven_shm_fd, table_shm_fd;
 Oven *oven;
 Table *table;
 
 void exit_procedure(){
     printf("Exit procedure\n");
-    shmdt(oven);
-    shmdt( table);
-    shmctl(oven_shm_id, IPC_RMID, NULL);
-    shmctl(table_shm_id, IPC_RMID, NULL);
-    semctl(sem_set_id, 0, IPC_RMID, NULL);
+    munmap(oven, sizeof(oven));
+    munmap(table, sizeof(table));
+    shm_unlink(OVEN_NAME);
+    shm_unlink(TABLE_NAME);
+//    for(int i = 0; i < SEM_NUM; i++){
+//        sem_close(sem_addr[i]);
+//    }
+//    for(int i = 0; i < SEM_NUM; i++){
+//        sem_unlink(sem_names[i]);
+//    }
+    sem_unlink(OVEN_SEM);
+    sem_unlink(TABLE_SEM);
+    sem_unlink(FULL_OVEN_SEM);
+    sem_unlink(FULL_TABLE_SEM);
+    sem_unlink(EMPTY_TABLE_SEM);
 }
 
 void create_shm(){
-    key_t oven_key, table_key;
+    oven_shm_fd = shm_open(OVEN_NAME, O_RDWR | O_CREAT, 0666);
+    table_shm_fd = shm_open(TABLE_NAME, O_RDWR | O_CREAT, 0666);
 
-    char *home_path = get_home_path();
-    oven_key = ftok(home_path, OVEN_PROJ_ID);
-    table_key = ftok(home_path, TABLE_PROJ_ID);
+    ftruncate(oven_shm_fd, sizeof(oven));
+    ftruncate(table_shm_fd, sizeof(table));
 
-    oven_shm_id = shmget(oven_key, sizeof(Oven), IPC_CREAT | 0666);
-    table_shm_id = shmget(table_key, sizeof(Table), IPC_CREAT | 0666);
+    oven = mmap(NULL, sizeof(oven), PROT_READ | PROT_WRITE, MAP_SHARED, oven_shm_fd, 0);
+    table = mmap(NULL, sizeof(table), PROT_READ | PROT_WRITE, MAP_SHARED, table_shm_fd, 0);
 
-    oven = shmat(oven_shm_id, NULL, 0);
-    table = shmat(table_shm_id, NULL, 0);
-
-    printf("Created oven (id: %d) and table (id: %d)\n", oven_shm_id, table_shm_id);
+    printf("Created oven (fd: %d) and table (fd: %d)\n", oven_shm_fd, table_shm_fd);
 }
 
 void initialize_oven(){
@@ -41,39 +49,40 @@ void initialize_table(){
 }
 
 void create_sem(){
-    key_t sem_key;
+//    for(int i = 0; i < SEM_NUM; i++){
+//        int value;
+//        switch (i) {
+//            case OVEN_ACCESS_SEM_ID:
+//            case TABLE_ACCESS_SEM_ID:
+//                value = 1;
+//                break;
+//            case FULL_OVEN_SEM_ID:
+//                value = OVEN_SIZE;
+//                break;
+//            case FULL_TABLE_SEM_ID:
+//                value = TABLE_SIZE;
+//                break;
+//            case EMPTY_TABLE_SEM_ID:
+//                value = 0;
+//                break;
+//        }
+//        sem_addr[i] = sem_open(sem_names[i], O_RDWR | O_CREAT, 0666, value);
+//        if(sem_addr[i] == SEM_FAILED) {
+//            perror("Problem with creating semaphore");
+//            exit(1);
+//        }
+//        printf("Created semaphore\n");
+//    }
+    sem_open(EMPTY_OVEN_SEM, O_CREAT, 0666, 0);
+    sem_open(EMPTY_TABLE_SEM, O_CREAT, 0666, 0);
+    sem_open(OVEN_SEM, O_CREAT, 0666, 1);
+    sem_open(TABLE_SEM, O_CREAT, 0666, 1);
+    sem_open(FULL_OVEN_SEM, O_CREAT, 0666, OVEN_SIZE);
+    sem_open(FULL_TABLE_SEM, O_CREAT, 0666, TABLE_SIZE);
 
-    char *home_path = get_home_path();
-    sem_key = ftok(home_path, SEM_PROJ_ID);
-    if(sem_key == -1) {
-        perror("Problem with getting semaphore key\n");
-        exit(1);
-    }
-
-    sem_set_id = semget(sem_key, 5, IPC_CREAT | 0666);
-    if(sem_set_id == -1) {
-        perror("Problem with creating semaphore");
-        exit(1);
-    }
-    printf("Created semaphore set (id: %d)\n", sem_set_id);
 }
 
-void initialize_sem(){
-    union semun arg;
-    arg.val = 1;
 
-    semctl(sem_set_id, OVEN_ACCESS_SEM_ID, SETVAL, arg);
-    semctl(sem_set_id, TABLE_ACCESS_SEM_ID, SETVAL, arg);
-
-    arg.val = OVEN_SIZE;
-    semctl(sem_set_id, FULL_OVEN_SEM_ID, SETVAL, arg);
-
-    arg.val = TABLE_SIZE;
-    semctl(sem_set_id, FULL_TABLE_SEM_ID, SETVAL, arg);
-
-    arg.val = 0;
-    semctl(sem_set_id, EMPTY_TABLE_SEM_ID, SETVAL, arg);
-}
 
 int main(int argc, char *argv[]){
     if(argc != 3){
@@ -86,8 +95,8 @@ int main(int argc, char *argv[]){
     create_shm();
     initialize_oven();
     initialize_table();
+    fill_sem_names(sem_names);
     create_sem();
-    initialize_sem();
 
     signal(SIGINT, exit_procedure);
 
