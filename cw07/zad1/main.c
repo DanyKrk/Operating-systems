@@ -14,16 +14,6 @@ void exit_procedure(){
     semctl(sem_set_id, 0, IPC_RMID, NULL);
 }
 
-void initialize_oven(){
-    oven -> next_in_id = 0;
-    oven -> pizzas_num = 0;
-}
-
-void initialize_table(){
-    table -> next_in_id = 0;
-    table -> pizzas_num = 0;
-}
-
 void create_shm(){
     key_t oven_key, table_key;
 
@@ -38,6 +28,16 @@ void create_shm(){
     table = shmat(table_shm_id, NULL, 0);
 
     printf("Created oven (id: %d) and table (id: %d)\n", oven_shm_id, table_shm_id);
+}
+
+void initialize_oven(){
+    oven -> next_in_id = 0;
+    oven -> pizzas_num = 0;
+}
+
+void initialize_table(){
+    table -> next_in_id = 0;
+    table -> pizzas_num = 0;
 }
 
 void create_sem(){
@@ -60,7 +60,7 @@ void create_sem(){
 
 void initialize_sem(){
     union semun arg;
-    arg.val = 2;
+    arg.val = 1;
 
     semctl(sem_set_id, OVEN_ACCESS_SEM_ID, SETVAL, arg);
     semctl(sem_set_id, TABLE_ACCESS_SEM_ID, SETVAL, arg);

@@ -17,17 +17,26 @@
 #include "sys/shm.h"
 #include "signal.h"
 #include "sys/wait.h"
+#include <sys/prctl.h>
 
 #define TABLE_SIZE 5
 #define OVEN_SIZE 5
+
+#define PIZZA_PREPARATION_TIME 1
+#define TRAVEL_TIME 5
+#define PIZZA_BAKING_TIME 4
+
 #define OVEN_PROJ_ID 2115
 #define TABLE_PROJ_ID 2137
 #define SEM_PROJ_ID 2905
+
 #define OVEN_ACCESS_SEM_ID 0
 #define TABLE_ACCESS_SEM_ID 1
 #define FULL_OVEN_SEM_ID 2
 #define FULL_TABLE_SEM_ID 3
 #define EMPTY_TABLE_SEM_ID 4
+
+
 
 
 
