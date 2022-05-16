@@ -12,17 +12,12 @@ void exit_procedure(){
     munmap(table, sizeof(table));
     shm_unlink(OVEN_NAME);
     shm_unlink(TABLE_NAME);
-//    for(int i = 0; i < SEM_NUM; i++){
-//        sem_close(sem_addr[i]);
-//    }
-//    for(int i = 0; i < SEM_NUM; i++){
-//        sem_unlink(sem_names[i]);
-//    }
-    sem_unlink(OVEN_SEM);
-    sem_unlink(TABLE_SEM);
-    sem_unlink(FULL_OVEN_SEM);
-    sem_unlink(FULL_TABLE_SEM);
-    sem_unlink(EMPTY_TABLE_SEM);
+    for(int i = 0; i < SEM_NUM; i++){
+        sem_close(sem_addr[i]);
+    }
+    for(int i = 0; i < SEM_NUM; i++){
+        sem_unlink(sem_names[i]);
+    }
 }
 
 void create_shm(){
@@ -49,37 +44,29 @@ void initialize_table(){
 }
 
 void create_sem(){
-//    for(int i = 0; i < SEM_NUM; i++){
-//        int value;
-//        switch (i) {
-//            case OVEN_ACCESS_SEM_ID:
-//            case TABLE_ACCESS_SEM_ID:
-//                value = 1;
-//                break;
-//            case FULL_OVEN_SEM_ID:
-//                value = OVEN_SIZE;
-//                break;
-//            case FULL_TABLE_SEM_ID:
-//                value = TABLE_SIZE;
-//                break;
-//            case EMPTY_TABLE_SEM_ID:
-//                value = 0;
-//                break;
-//        }
-//        sem_addr[i] = sem_open(sem_names[i], O_RDWR | O_CREAT, 0666, value);
-//        if(sem_addr[i] == SEM_FAILED) {
-//            perror("Problem with creating semaphore");
-//            exit(1);
-//        }
-//        printf("Created semaphore\n");
-//    }
-    sem_open(EMPTY_OVEN_SEM, O_CREAT, 0666, 0);
-    sem_open(EMPTY_TABLE_SEM, O_CREAT, 0666, 0);
-    sem_open(OVEN_SEM, O_CREAT, 0666, 1);
-    sem_open(TABLE_SEM, O_CREAT, 0666, 1);
-    sem_open(FULL_OVEN_SEM, O_CREAT, 0666, OVEN_SIZE);
-    sem_open(FULL_TABLE_SEM, O_CREAT, 0666, TABLE_SIZE);
-
+    for(int i = 0; i < SEM_NUM; i++){
+        int value;
+        switch (i) {
+            case OVEN_ACCESS_SEM_ID:
+            case TABLE_ACCESS_SEM_ID:
+                value = 1;
+                break;
+            case FULL_OVEN_SEM_ID:
+                value = OVEN_SIZE;
+                break;
+            case FULL_TABLE_SEM_ID:
+                value = TABLE_SIZE;
+                break;
+            case EMPTY_TABLE_SEM_ID:
+                value = 0;
+                break;
+        }
+        sem_addr[i] = sem_open(sem_names[i], O_RDWR | O_CREAT, 0666, value);
+        if(sem_addr[i] == SEM_FAILED) {
+            perror("Problem with creating semaphore");
+            exit(1);
+        }
+    }
 }
 
 

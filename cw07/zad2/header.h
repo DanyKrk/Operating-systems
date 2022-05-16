@@ -34,7 +34,6 @@
 
 #define OVEN_NAME "Oven"
 #define TABLE_NAME "Table"
-#define SEM_NAME "Semaphores"
 
 #define SEM_NUM 5
 #define OVEN_ACCESS_SEM_ID 0
@@ -42,13 +41,6 @@
 #define FULL_OVEN_SEM_ID 2
 #define FULL_TABLE_SEM_ID 3
 #define EMPTY_TABLE_SEM_ID 4
-
-#define EMPTY_OVEN_SEM "/EMPTY_OVEN_S"
-#define OVEN_SEM "/OVEN_S"
-#define FULL_OVEN_SEM "/FULL_OVEN_S"
-#define EMPTY_TABLE_SEM "/EMPTY_TABLE_S"
-#define TABLE_SEM "/TABLE_S"
-#define FULL_TABLE_SEM "/FULL_TABLE_S"
 
 
 void fill_sem_names(char sem_names[SEM_NUM][NAME_SIZE]){
@@ -117,42 +109,18 @@ void print_sem_val(sem_t *sem){
     printf("Value of semafor: %d\n", val);
 }
 
-//void add_val_to_sem(sem_t *sem_addr[SEM_NUM], int sem_id, int val){
-//    printf("Sem val before adding %d: ", val);
-//    print_sem_val(sem_addr[sem_id]);
-//
-//    if(val >= 0){
-//        for(int i = 0; i < val; i++){
-//            sem_post(sem_addr[sem_id]);
-//        }
-//    }
-//    else{
-//        for(int i = 0; i < -val; i++){
-//            sem_wait(sem_addr[sem_id]);
-//        }
-//    }
-//    printf("Sem val after adding %d: ", val);
-//    print_sem_val(sem_addr[sem_id]);
-//}
+void add_val_to_sem(sem_t *sem_addr[SEM_NUM], int sem_id, int val){
 
-void add_val_to_sem(sem_t *sem, int val){
     if(val >= 0){
         for(int i = 0; i < val; i++){
-            sem_post(sem);
+            sem_post(sem_addr[sem_id]);
         }
     }
     else{
         for(int i = 0; i < -val; i++){
-            sem_wait(sem);
+            sem_wait(sem_addr[sem_id]);
         }
     }
 }
-
-sem_t* get_sem(char* name){
-    sem_t * sem = sem_open(name, O_RDWR);
-    return sem;
-}
-
-
 
 #endif //CW07_HEADER_H

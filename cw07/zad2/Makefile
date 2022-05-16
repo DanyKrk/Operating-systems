@@ -5,7 +5,7 @@ all: main deliverer baker
 	make deliverer
 	make baker
 test: clean all
-	./main 1 1
+	./main 3 3
 
 main:
 	$(CC) main.c -o main -lpthread -lrt
@@ -15,8 +15,6 @@ deliverer:
 
 baker:
 	$(CC) baker.c -o baker -lpthread -lrt
-
-
 
 clean:
 	rm -f main baker deliverer
