@@ -4,10 +4,9 @@ all: main deliverer baker
 	make main
 	make deliverer
 	make baker
-test:
-	make clean
-	make all
+test: clean all
 	./main 3 3
+
 main:
 	$(CC) main.c -o main
 

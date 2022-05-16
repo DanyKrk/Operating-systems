@@ -1,7 +1,7 @@
 #include "header.h"
 
 
-int oven_shm_id, table_shm_id, sem_id;
+int oven_shm_id, table_shm_id, sem_set_id;
 Oven *oven;
 Table *table;
 
@@ -11,7 +11,7 @@ void exit_procedure(){
     shmdt( table);
     shmctl(oven_shm_id, IPC_RMID, NULL);
     shmctl(table_shm_id, IPC_RMID, NULL);
-    semctl(sem_id, 0, IPC_RMID);
+    semctl(sem_set_id, 0, IPC_RMID, NULL);
 }
 
 void initialize_oven(){
@@ -45,18 +45,34 @@ void create_sem(){
 
     char *home_path = get_home_path();
     sem_key = ftok(home_path, SEM_PROJ_ID);
+    if(sem_key == -1) {
+        perror("Problem with getting semaphore key\n");
+        exit(1);
+    }
 
-    sem_id = semget(sem_key, 2, IPC_CREAT | 0666);
-
-    printf("Created semaphore set (id: %d)\n", sem_id);
+    sem_set_id = semget(sem_key, 5, IPC_CREAT | 0666);
+    if(sem_set_id == -1) {
+        perror("Problem with creating semaphore");
+        exit(1);
+    }
+    printf("Created semaphore set (id: %d)\n", sem_set_id);
 }
 
 void initialize_sem(){
     union semun arg;
-    arg.val = 1;
+    arg.val = 2;
 
-    semctl(sem_id, OVEN_SEM_ID, SETVAL, arg);
-    semctl(sem_id, TABLE_SEM_ID, SETVAL, arg);
+    semctl(sem_set_id, OVEN_ACCESS_SEM_ID, SETVAL, arg);
+    semctl(sem_set_id, TABLE_ACCESS_SEM_ID, SETVAL, arg);
+
+    arg.val = OVEN_SIZE;
+    semctl(sem_set_id, FULL_OVEN_SEM_ID, SETVAL, arg);
+
+    arg.val = TABLE_SIZE;
+    semctl(sem_set_id, FULL_TABLE_SEM_ID, SETVAL, arg);
+
+    arg.val = 0;
+    semctl(sem_set_id, EMPTY_TABLE_SEM_ID, SETVAL, arg);
 }
 
 int main(int argc, char *argv[]){
@@ -67,12 +83,13 @@ int main(int argc, char *argv[]){
     int bakers_num = atoi(argv[1]);
     int deliverers_num = atoi(argv[2]);
 
-//    atexit(exit_procedure);
     create_shm();
     initialize_oven();
     initialize_table();
     create_sem();
     initialize_sem();
+
+    signal(SIGINT, exit_procedure);
 
     for(int i = 0; i < bakers_num; i++){
         pid_t child_id = fork();
@@ -87,4 +104,6 @@ int main(int argc, char *argv[]){
             execl("./deliverer", "./deliverer", NULL);
         }
     }
+
+    for(int i = 0; i < bakers_num + deliverers_num; i++) wait(NULL);
 }

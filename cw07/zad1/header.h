@@ -15,14 +15,20 @@
 #include "sys/ipc.h"
 #include "sys/types.h"
 #include "sys/shm.h"
+#include "signal.h"
+#include "sys/wait.h"
 
 #define TABLE_SIZE 5
 #define OVEN_SIZE 5
 #define OVEN_PROJ_ID 2115
 #define TABLE_PROJ_ID 2137
 #define SEM_PROJ_ID 2905
-#define OVEN_SEM_ID 0
-#define TABLE_SEM_ID 1
+#define OVEN_ACCESS_SEM_ID 0
+#define TABLE_ACCESS_SEM_ID 1
+#define FULL_OVEN_SEM_ID 2
+#define FULL_TABLE_SEM_ID 3
+#define EMPTY_TABLE_SEM_ID 4
+
 
 
 typedef struct {
@@ -57,21 +63,21 @@ int get_oven_shm_id(){
     key_t oven_key;
     char *home_path = get_home_path();
     oven_key = ftok(home_path, OVEN_PROJ_ID);
-    return shmget(oven_key, sizeof(Oven), IPC_CREAT | 0666);
+    return shmget(oven_key, sizeof(Oven), 0);
 }
 
 int get_table_shm_id(){
     key_t table_key;
     char *home_path = get_home_path();
     table_key = ftok(home_path, TABLE_PROJ_ID);
-    return shmget(table_key, sizeof(Table), IPC_CREAT | 0666);
+    return shmget(table_key, sizeof(Table), 0);
 }
 
 int get_sem_id(){
     key_t sem_key;
     char *home_path = get_home_path();
     sem_key = ftok(home_path, SEM_PROJ_ID);
-    return semget(sem_key, 2, IPC_CREAT | 0666);
+    return semget(sem_key, 5, 0);
 }
 
 char* get_current_time(){
@@ -85,6 +91,12 @@ char* get_current_time(){
     char* current_time = calloc(50, sizeof(char));
     sprintf(current_time, "%s:%03d", buffer, ml_sec);
     return current_time;
+}
+
+void add_val_to_sem(int sem_set_id, int sem_id, struct sembuf sembuf, int val){
+    sembuf.sem_num = sem_id;
+    sembuf.sem_op = val;
+    semop(sem_set_id, &sembuf, 1);
 }
 
 #endif //CW07_HEADER_H
