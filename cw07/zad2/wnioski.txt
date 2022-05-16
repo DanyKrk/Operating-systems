@@ -1,0 +1,9 @@
+Wnioski dla N,M = 3:
+
+Pojemność pieca jest wystarczająca (nie przepełnia się). Dostawcy nie nadążają, liczba pizz na stole często osiąga maksymalną wartość (5). Przez to kucharze czasami muszą czekać na zwolnienie się stołu. Dostawcy pracują bez przerwy.
+
+
+
+Wnioski dla N,M = 7:
+
+Sytuacja taka, jak dla N, M = 3. Stół zazwyczaj jest przepełniony. Piec nie, ponieważ piekarze dużu czasu spędzają czekając, żeby przełożyć pizzę z pieca na stół.
