@@ -1,3 +1,9 @@
+#KOMENTARZ
+#Podział blokowy jest o wiele szybszy od podziału według konkretnych wartości. Wynika to z tego, że w drugim przypadku
+#wątek musi przejrzeć całą tablicę w poszukiwaniu swoich komórek.
+#Najszybsza okazała się sytuacja w której odpalałem 4 wątki. Przy większej liczbie wątków dłuższy czas
+#wykonania wynikał najpewniej z konieczności odplenia tychże wątków.
+
 Number of threads: 1
 Method used: numbers
 thread id:   0 - time: 94041008813296 μs
