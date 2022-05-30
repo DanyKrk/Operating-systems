@@ -3,38 +3,38 @@
 
 #include "header.h"
 
-void elf_wait(int ID) {
-    pthread_mutex_lock(&mutex_elf_wait);
-    while (waiting_elves == MAX_WAITING_ELVES) {
-        printf("Elf: czeka na powrót elfów, ID: %d\n", ID);
-        pthread_cond_wait(&cond_elf_wait, &mutex_elf_wait);
+void elf_wait(int id) {
+    pthread_mutex_lock(&elf_wait_mutex);
+    while (waiting_elves == WORKSHOP_CAPACITY) {
+        printf("Elf: czeka na powrót elfów, ID: %d\n", id);
+        pthread_cond_wait(&elf_wait_cond, &elf_wait_mutex);
     }
-    pthread_mutex_unlock(&mutex_elf_wait);
+    pthread_mutex_unlock(&elf_wait_mutex);
 }
 
-void elf_issue(int ID) {
-    pthread_mutex_lock(&mutex_elf);
-    if (waiting_elves < MAX_WAITING_ELVES) {
-        elves_queue[waiting_elves] = ID;
+void elf_report_problem(int id) {
+    pthread_mutex_lock(&elf_mutex);
+    if (waiting_elves < WORKSHOP_CAPACITY) {
+        elves_queue[waiting_elves] = id;
         waiting_elves++;
-        printf("Elf: czeka [%d] elfów na Mikołaja, ID: %d\n", waiting_elves, ID);
+        printf("Elf: czeka %d elfów na Mikołaja, ID: %d\n", waiting_elves, id);
 
-        if (waiting_elves == MAX_WAITING_ELVES){
-            printf("Elf: wybudzam Mikołaja, ID: %d\n", ID);
-            pthread_mutex_lock(&mutex_santa);
-            pthread_cond_broadcast(&cond_santa);
-            pthread_mutex_unlock(&mutex_santa);
+        if (waiting_elves == WORKSHOP_CAPACITY){
+            printf("Elf: wybudzam Mikołaja, ID: %d\n", id);
+            pthread_mutex_lock(&santa_mutex);
+            pthread_cond_broadcast(&santa_cond);
+            pthread_mutex_unlock(&santa_mutex);
         }
     }
-    pthread_mutex_unlock(&mutex_elf);
+    pthread_mutex_unlock(&elf_mutex);
 }
 
 void* elf(void* arg){
-    int ID = *((int *) arg);
+    int id = *((int *) arg);
     while(true){
         sleep(ELF_WORKING_TIME);
-        elf_wait(ID);
-        elf_issue(ID);
+        elf_wait(id);
+        elf_report_problem(id);
     }
 }
 
