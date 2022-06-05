@@ -1,7 +1,3 @@
-//
-// Created by sylwia on 5/26/21.
-//
-
 #ifndef LAB10_COMMON_H
 #define LAB10_COMMON_H
 
@@ -49,7 +45,6 @@ typedef enum{
 typedef struct{
     int move;
     sign objects[9];
-
 } game_board;
 
 

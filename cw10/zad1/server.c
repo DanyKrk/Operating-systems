@@ -19,7 +19,7 @@ int add_client(char *name, int fd){
 
     // another waiting client
     for (int i = 0; i < MAX_CLIENTS; i += 2){
-        if (clients[i] != NULL && clients[i + 1] == NULL){
+        if (clients[i] != NULL && i + 1 < MAX_CLIENTS && clients[i + 1] == NULL){
             idx = i + 1;
             break;
         }
@@ -76,11 +76,12 @@ void free_client(int index){
 }
 
 void remove_client(char *name){
-    int idx = -1;
-    for (int i = 0; i < MAX_CLIENTS; i++){
-        if (clients[i] != NULL && strcmp(clients[i]->name, name) == 0) idx = i;
-    }
+    int idx = find_client(name);
 
+    if(idx == -1){
+        printf("No client: %s found\n", name);
+        return;
+    }
     printf("Removing client: %s\n", name);
     free_client(idx);
 }
@@ -98,8 +99,8 @@ void delete_not_available_clients(){
 void send_pings(){
     for (int i = 0; i < MAX_CLIENTS; i++){
         if (clients[i]){
-            send(clients[i]->fd, "ping: ", MAX_MSG_LEN, 0);
             clients[i]->available = false;
+            send(clients[i]->fd, "ping: ", MAX_MSG_LEN, 0);
         }
     }
 }
@@ -274,10 +275,8 @@ int main(int argc, char* argv[]){
                     first = get_opponent(index);
                 }
 
-                send(clients[first]->fd, "add:O",
-                     MAX_MSG_LEN, 0);
-                send(clients[second]->fd, "add:X",
-                     MAX_MSG_LEN, 0);
+                send(clients[first]->fd, "add:O",MAX_MSG_LEN, 0);
+                send(clients[second]->fd, "add:X",MAX_MSG_LEN, 0);
             }
         }
 
@@ -286,8 +285,7 @@ int main(int argc, char* argv[]){
             int player = find_client(name);
 
             sprintf(buffer, "move:%d", move);
-            send(clients[get_opponent(player)]->fd, buffer, MAX_MSG_LEN,
-                 0);
+            send(clients[get_opponent(player)]->fd, buffer, MAX_MSG_LEN,0);
         }
         if (strcmp(command, "end") == 0){
             remove_client(name);
@@ -295,8 +293,7 @@ int main(int argc, char* argv[]){
 
         if (strcmp(command, "pong") == 0){
             int player = find_client(name);
-            if (player != -1) clients[player]->available = 1;
-
+            if (player != -1) clients[player]->available = true;
         }
         pthread_mutex_unlock(&mutex);
     }
